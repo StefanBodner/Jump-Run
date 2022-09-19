@@ -1,0 +1,17 @@
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\bin\Debug\net6.0-windows\JumpRun.exe
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\bin\Debug\net6.0-windows\JumpRun.deps.json
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\bin\Debug\net6.0-windows\JumpRun.runtimeconfig.json
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\bin\Debug\net6.0-windows\JumpRun.dll
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\bin\Debug\net6.0-windows\JumpRun.pdb
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.csproj.AssemblyReference.cache
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.csproj.GenerateResource.cache
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.AssemblyInfoInputs.cache
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.AssemblyInfo.cs
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.csproj.CoreCompileInputs.cache
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.dll
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\refint\JumpRun.dll
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.pdb
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.genruntimeconfig.cache
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\ref\JumpRun.dll
+C:\Users\stefan.bodner\source\repos\StefanBodner\Jump-Run\JumpRun\JumpRun\obj\Debug\net6.0-windows\JumpRun.frm_game.resources
