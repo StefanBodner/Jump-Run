@@ -34,13 +34,17 @@
             this.lbl_left = new System.Windows.Forms.Label();
             this.lbl_right = new System.Windows.Forms.Label();
             this.lbl_up = new System.Windows.Forms.Label();
+            this.game = new System.Windows.Forms.Panel();
+            this.lbl_headroom = new System.Windows.Forms.Label();
+            this.lbl_inAir = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
+            this.game.SuspendLayout();
             this.SuspendLayout();
             // 
             // player
             // 
             this.player.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.player.Location = new System.Drawing.Point(236, 289);
+            this.player.Location = new System.Drawing.Point(138, 279);
             this.player.Name = "player";
             this.player.Size = new System.Drawing.Size(50, 100);
             this.player.TabIndex = 0;
@@ -55,7 +59,7 @@
             // lbl_left
             // 
             this.lbl_left.AutoSize = true;
-            this.lbl_left.Location = new System.Drawing.Point(821, 9);
+            this.lbl_left.Location = new System.Drawing.Point(881, 9);
             this.lbl_left.Name = "lbl_left";
             this.lbl_left.Size = new System.Drawing.Size(24, 15);
             this.lbl_left.TabIndex = 1;
@@ -64,7 +68,7 @@
             // lbl_right
             // 
             this.lbl_right.AutoSize = true;
-            this.lbl_right.Location = new System.Drawing.Point(821, 24);
+            this.lbl_right.Location = new System.Drawing.Point(881, 24);
             this.lbl_right.Name = "lbl_right";
             this.lbl_right.Size = new System.Drawing.Size(32, 15);
             this.lbl_right.TabIndex = 2;
@@ -73,32 +77,61 @@
             // lbl_up
             // 
             this.lbl_up.AutoSize = true;
-            this.lbl_up.Location = new System.Drawing.Point(821, 39);
+            this.lbl_up.Location = new System.Drawing.Point(881, 39);
             this.lbl_up.Name = "lbl_up";
             this.lbl_up.Size = new System.Drawing.Size(21, 15);
             this.lbl_up.TabIndex = 3;
             this.lbl_up.Text = "up";
+            // 
+            // game
+            // 
+            this.game.Controls.Add(this.lbl_headroom);
+            this.game.Controls.Add(this.lbl_inAir);
+            this.game.Controls.Add(this.player);
+            this.game.Controls.Add(this.lbl_up);
+            this.game.Controls.Add(this.lbl_left);
+            this.game.Controls.Add(this.lbl_right);
+            this.game.Location = new System.Drawing.Point(0, 0);
+            this.game.Name = "game";
+            this.game.Size = new System.Drawing.Size(1000, 500);
+            this.game.TabIndex = 4;
+            this.game.Paint += new System.Windows.Forms.PaintEventHandler(this.game_Paint);
+            // 
+            // lbl_headroom
+            // 
+            this.lbl_headroom.AutoSize = true;
+            this.lbl_headroom.Location = new System.Drawing.Point(881, 69);
+            this.lbl_headroom.Name = "lbl_headroom";
+            this.lbl_headroom.Size = new System.Drawing.Size(62, 15);
+            this.lbl_headroom.TabIndex = 5;
+            this.lbl_headroom.Text = "headroom";
+            // 
+            // lbl_inAir
+            // 
+            this.lbl_inAir.AutoSize = true;
+            this.lbl_inAir.Location = new System.Drawing.Point(881, 54);
+            this.lbl_inAir.Name = "lbl_inAir";
+            this.lbl_inAir.Size = new System.Drawing.Size(32, 15);
+            this.lbl_inAir.TabIndex = 4;
+            this.lbl_inAir.Text = "inAir";
             // 
             // frm_game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 500);
-            this.Controls.Add(this.lbl_up);
-            this.Controls.Add(this.lbl_right);
-            this.Controls.Add(this.lbl_left);
-            this.Controls.Add(this.player);
+            this.Controls.Add(this.game);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frm_game";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "JumpRun";
             this.Load += new System.EventHandler(this.frm_game_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frm_game_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
+            this.game.ResumeLayout(false);
+            this.game.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -109,5 +142,8 @@
         private Label lbl_left;
         private Label lbl_right;
         private Label lbl_up;
+        private Panel game;
+        private Label lbl_inAir;
+        private Label lbl_headroom;
     }
 }
