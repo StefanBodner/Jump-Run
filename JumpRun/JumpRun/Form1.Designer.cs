@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.player = new System.Windows.Forms.PictureBox();
             this.tmr_game = new System.Windows.Forms.Timer(this.components);
             this.lbl_left = new System.Windows.Forms.Label();
             this.lbl_right = new System.Windows.Forms.Label();
@@ -37,18 +36,13 @@
             this.game = new System.Windows.Forms.Panel();
             this.lbl_headroom = new System.Windows.Forms.Label();
             this.lbl_inAir = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
+            this.lbl_x = new System.Windows.Forms.Label();
+            this.lbl_y = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_gravity = new System.Windows.Forms.Label();
             this.game.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // player
-            // 
-            this.player.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.player.Location = new System.Drawing.Point(138, 279);
-            this.player.Name = "player";
-            this.player.Size = new System.Drawing.Size(50, 100);
-            this.player.TabIndex = 0;
-            this.player.TabStop = false;
             // 
             // tmr_game
             // 
@@ -59,7 +53,7 @@
             // lbl_left
             // 
             this.lbl_left.AutoSize = true;
-            this.lbl_left.Location = new System.Drawing.Point(881, 9);
+            this.lbl_left.Location = new System.Drawing.Point(0, 0);
             this.lbl_left.Name = "lbl_left";
             this.lbl_left.Size = new System.Drawing.Size(24, 15);
             this.lbl_left.TabIndex = 1;
@@ -68,7 +62,7 @@
             // lbl_right
             // 
             this.lbl_right.AutoSize = true;
-            this.lbl_right.Location = new System.Drawing.Point(881, 24);
+            this.lbl_right.Location = new System.Drawing.Point(0, 15);
             this.lbl_right.Name = "lbl_right";
             this.lbl_right.Size = new System.Drawing.Size(32, 15);
             this.lbl_right.TabIndex = 2;
@@ -77,7 +71,7 @@
             // lbl_up
             // 
             this.lbl_up.AutoSize = true;
-            this.lbl_up.Location = new System.Drawing.Point(881, 39);
+            this.lbl_up.Location = new System.Drawing.Point(0, 30);
             this.lbl_up.Name = "lbl_up";
             this.lbl_up.Size = new System.Drawing.Size(21, 15);
             this.lbl_up.TabIndex = 3;
@@ -85,12 +79,7 @@
             // 
             // game
             // 
-            this.game.Controls.Add(this.lbl_headroom);
-            this.game.Controls.Add(this.lbl_inAir);
-            this.game.Controls.Add(this.player);
-            this.game.Controls.Add(this.lbl_up);
-            this.game.Controls.Add(this.lbl_left);
-            this.game.Controls.Add(this.lbl_right);
+            this.game.Controls.Add(this.panel1);
             this.game.Location = new System.Drawing.Point(0, 0);
             this.game.Name = "game";
             this.game.Size = new System.Drawing.Size(1000, 500);
@@ -100,7 +89,7 @@
             // lbl_headroom
             // 
             this.lbl_headroom.AutoSize = true;
-            this.lbl_headroom.Location = new System.Drawing.Point(881, 69);
+            this.lbl_headroom.Location = new System.Drawing.Point(0, 60);
             this.lbl_headroom.Name = "lbl_headroom";
             this.lbl_headroom.Size = new System.Drawing.Size(62, 15);
             this.lbl_headroom.TabIndex = 5;
@@ -109,11 +98,53 @@
             // lbl_inAir
             // 
             this.lbl_inAir.AutoSize = true;
-            this.lbl_inAir.Location = new System.Drawing.Point(881, 54);
+            this.lbl_inAir.Location = new System.Drawing.Point(0, 45);
             this.lbl_inAir.Name = "lbl_inAir";
             this.lbl_inAir.Size = new System.Drawing.Size(32, 15);
             this.lbl_inAir.TabIndex = 4;
             this.lbl_inAir.Text = "inAir";
+            // 
+            // lbl_x
+            // 
+            this.lbl_x.AutoSize = true;
+            this.lbl_x.Location = new System.Drawing.Point(0, 75);
+            this.lbl_x.Name = "lbl_x";
+            this.lbl_x.Size = new System.Drawing.Size(13, 15);
+            this.lbl_x.TabIndex = 6;
+            this.lbl_x.Text = "x";
+            // 
+            // lbl_y
+            // 
+            this.lbl_y.AutoSize = true;
+            this.lbl_y.Location = new System.Drawing.Point(0, 90);
+            this.lbl_y.Name = "lbl_y";
+            this.lbl_y.Size = new System.Drawing.Size(13, 15);
+            this.lbl_y.TabIndex = 7;
+            this.lbl_y.Text = "y";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lbl_gravity);
+            this.panel1.Controls.Add(this.lbl_left);
+            this.panel1.Controls.Add(this.lbl_y);
+            this.panel1.Controls.Add(this.lbl_right);
+            this.panel1.Controls.Add(this.lbl_x);
+            this.panel1.Controls.Add(this.lbl_up);
+            this.panel1.Controls.Add(this.lbl_headroom);
+            this.panel1.Controls.Add(this.lbl_inAir);
+            this.panel1.Location = new System.Drawing.Point(887, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(101, 213);
+            this.panel1.TabIndex = 8;
+            // 
+            // lbl_gravity
+            // 
+            this.lbl_gravity.AutoSize = true;
+            this.lbl_gravity.Location = new System.Drawing.Point(0, 105);
+            this.lbl_gravity.Name = "lbl_gravity";
+            this.lbl_gravity.Size = new System.Drawing.Size(43, 15);
+            this.lbl_gravity.TabIndex = 8;
+            this.lbl_gravity.Text = "gravity";
             // 
             // frm_game
             // 
@@ -128,16 +159,15 @@
             this.Load += new System.EventHandler(this.frm_game_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-            ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.game.ResumeLayout(false);
-            this.game.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private PictureBox player;
         private System.Windows.Forms.Timer tmr_game;
         private Label lbl_left;
         private Label lbl_right;
@@ -145,5 +175,9 @@
         private Panel game;
         private Label lbl_inAir;
         private Label lbl_headroom;
+        private Label lbl_y;
+        private Label lbl_x;
+        private Panel panel1;
+        private Label lbl_gravity;
     }
 }

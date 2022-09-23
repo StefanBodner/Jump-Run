@@ -12,7 +12,12 @@ namespace JumpRun
 
         }
 
-        #region Variables   
+        #region Variables 
+        static int x = 140;
+        static int y = 200;
+        Rectangle player = new Rectangle(x, y, 50, 100);
+        Rectangle playerOld;
+
         static bool left = false;
         static bool right = false;
         static bool up = false;
@@ -31,6 +36,10 @@ namespace JumpRun
         //Player Collision Detection
         static Rectangle colBot;
         static Rectangle colTop;
+        static Rectangle colTopLeft;
+        static Rectangle colTopRight;
+        static Rectangle colBotLeft;
+        static Rectangle colBotRight;
 
         Graphics g;
         #endregion
@@ -55,26 +64,21 @@ namespace JumpRun
         private void tmr_game_Tick(object sender, EventArgs e)
         {
             Movement();
+            DrawPlayer();
             Collision();
             DebugVariables();
-            ShowPlayerCollisionDetection();
+            //ShowPlayerCollisionDetection();
         }
 
         public void Movement()
         {
             if (left)
             {
-                player.Left -= playerSpeed;
+                x -= playerSpeed;
             }
             else if (right)
             {
-                player.Left += playerSpeed;
-            }
-
-            if (up && !inAir && headroom)
-            {
-                gravity = force;
-                inAir = true;
+                x += playerSpeed;
             }
 
             if (inAir)
@@ -86,7 +90,12 @@ namespace JumpRun
                 gravity = 0;
             }
 
-            player.Top += gravity;
+            if (up && !inAir && headroom)
+            {
+                inAir = true;
+                gravity = force;
+            }
+            y += gravity;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -133,42 +142,74 @@ namespace JumpRun
                 if (colBot.IntersectsWith(b))
                 {
                     inAir = false;
-                    player.Top = b.Top - player.Height;
+                    y = b.Top - player.Height;
+                    DrawWorld();
                 }
                 if (colTop.IntersectsWith(b))
                 {
                     headroom = false;
                     gravity = 0;
-                    player.Top = b.Bottom;
+                    y = b.Bottom;
+                    DrawWorld();
                 }
             }
         }
         #endregion
 
-        #region World Creation
+        #region World + Player Creation
         public void WorldCreation()
         {
             for (int i = 0; i < world.GetLength(0); i++)
             {
                 for (int j = 0; j < world.GetLength(1); j++)
                 {
-                    if (world[i, j] == 1) 
+                    if (world[i, j] == 1)
                     {
                         Rectangle block = new Rectangle(j * boxWidth, i * boxHeight, boxWidth, boxHeight);
                         g.FillRectangle(Brushes.LightBlue, block);
                         liBlocks.Add(block);
                     }
-                    else if(world[i, j] == 2) 
+                    else if (world[i, j] == 2)
                     {
                         Point[] points = new Point[3];
-                        points[0] = new Point(j * boxWidth, (i+1) * boxHeight);
-                        points[1] = new Point((j +1) * boxWidth, i * boxHeight);
-                        points[2] = new Point((j +1) * boxWidth, (i + 1) * boxHeight);
+                        points[0] = new Point(j * boxWidth, (i + 1) * boxHeight);
+                        points[1] = new Point((j + 1) * boxWidth, i * boxHeight);
+                        points[2] = new Point((j + 1) * boxWidth, (i + 1) * boxHeight);
                         g.FillPolygon(Brushes.CornflowerBlue, points);
                     }
                 }
             }
+        }
 
+        public void DrawWorld()
+        {
+            for (int i = 0; i < world.GetLength(0); i++)
+            {
+                for (int j = 0; j < world.GetLength(1); j++)
+                {
+                    if (world[i, j] == 1)
+                    {
+                        Rectangle block = new Rectangle(j * boxWidth, i * boxHeight, boxWidth, boxHeight);
+                        g.FillRectangle(Brushes.LightBlue, block);
+                    }
+                    else if (world[i, j] == 2)
+                    {
+                        Point[] points = new Point[3];
+                        points[0] = new Point(j * boxWidth, (i + 1) * boxHeight);
+                        points[1] = new Point((j + 1) * boxWidth, i * boxHeight);
+                        points[2] = new Point((j + 1) * boxWidth, (i + 1) * boxHeight);
+                        g.FillPolygon(Brushes.CornflowerBlue, points);
+                    }
+                }
+            }
+        }
+ 
+        public void DrawPlayer()
+        {
+            playerOld = player;
+            g.FillRectangle(SystemBrushes.Control, playerOld);
+            player = new Rectangle(x, y, 50, 100);
+            g.FillRectangle(Brushes.DarkGray, player);
         }
         #endregion
 
@@ -180,6 +221,9 @@ namespace JumpRun
             lbl_up.Text = "up: " + up.ToString();
             lbl_inAir.Text = "inAir: " + inAir.ToString();
             lbl_headroom.Text = "headroom: " + headroom.ToString();
+            lbl_x.Text = "x: " + x.ToString();
+            lbl_y.Text = "y: " + y.ToString();
+            lbl_gravity.Text = "gravity: " + gravity.ToString();
         }
 
         public void ShowPlayerCollisionDetection()
