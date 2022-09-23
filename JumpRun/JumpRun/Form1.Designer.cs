@@ -34,12 +34,13 @@
             this.lbl_right = new System.Windows.Forms.Label();
             this.lbl_up = new System.Windows.Forms.Label();
             this.game = new System.Windows.Forms.Panel();
-            this.lbl_headroom = new System.Windows.Forms.Label();
-            this.lbl_inAir = new System.Windows.Forms.Label();
-            this.lbl_x = new System.Windows.Forms.Label();
-            this.lbl_y = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_gravity = new System.Windows.Forms.Label();
+            this.lbl_y = new System.Windows.Forms.Label();
+            this.lbl_x = new System.Windows.Forms.Label();
+            this.lbl_headroom = new System.Windows.Forms.Label();
+            this.lbl_inAir = new System.Windows.Forms.Label();
+            this.lbl_jumpTicks = new System.Windows.Forms.Label();
             this.game.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -86,44 +87,9 @@
             this.game.TabIndex = 4;
             this.game.Paint += new System.Windows.Forms.PaintEventHandler(this.game_Paint);
             // 
-            // lbl_headroom
-            // 
-            this.lbl_headroom.AutoSize = true;
-            this.lbl_headroom.Location = new System.Drawing.Point(0, 60);
-            this.lbl_headroom.Name = "lbl_headroom";
-            this.lbl_headroom.Size = new System.Drawing.Size(62, 15);
-            this.lbl_headroom.TabIndex = 5;
-            this.lbl_headroom.Text = "headroom";
-            // 
-            // lbl_inAir
-            // 
-            this.lbl_inAir.AutoSize = true;
-            this.lbl_inAir.Location = new System.Drawing.Point(0, 45);
-            this.lbl_inAir.Name = "lbl_inAir";
-            this.lbl_inAir.Size = new System.Drawing.Size(32, 15);
-            this.lbl_inAir.TabIndex = 4;
-            this.lbl_inAir.Text = "inAir";
-            // 
-            // lbl_x
-            // 
-            this.lbl_x.AutoSize = true;
-            this.lbl_x.Location = new System.Drawing.Point(0, 75);
-            this.lbl_x.Name = "lbl_x";
-            this.lbl_x.Size = new System.Drawing.Size(13, 15);
-            this.lbl_x.TabIndex = 6;
-            this.lbl_x.Text = "x";
-            // 
-            // lbl_y
-            // 
-            this.lbl_y.AutoSize = true;
-            this.lbl_y.Location = new System.Drawing.Point(0, 90);
-            this.lbl_y.Name = "lbl_y";
-            this.lbl_y.Size = new System.Drawing.Size(13, 15);
-            this.lbl_y.TabIndex = 7;
-            this.lbl_y.Text = "y";
-            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lbl_jumpTicks);
             this.panel1.Controls.Add(this.lbl_gravity);
             this.panel1.Controls.Add(this.lbl_left);
             this.panel1.Controls.Add(this.lbl_y);
@@ -145,6 +111,51 @@
             this.lbl_gravity.Size = new System.Drawing.Size(43, 15);
             this.lbl_gravity.TabIndex = 8;
             this.lbl_gravity.Text = "gravity";
+            // 
+            // lbl_y
+            // 
+            this.lbl_y.AutoSize = true;
+            this.lbl_y.Location = new System.Drawing.Point(0, 90);
+            this.lbl_y.Name = "lbl_y";
+            this.lbl_y.Size = new System.Drawing.Size(13, 15);
+            this.lbl_y.TabIndex = 7;
+            this.lbl_y.Text = "y";
+            // 
+            // lbl_x
+            // 
+            this.lbl_x.AutoSize = true;
+            this.lbl_x.Location = new System.Drawing.Point(0, 75);
+            this.lbl_x.Name = "lbl_x";
+            this.lbl_x.Size = new System.Drawing.Size(13, 15);
+            this.lbl_x.TabIndex = 6;
+            this.lbl_x.Text = "x";
+            // 
+            // lbl_headroom
+            // 
+            this.lbl_headroom.AutoSize = true;
+            this.lbl_headroom.Location = new System.Drawing.Point(0, 60);
+            this.lbl_headroom.Name = "lbl_headroom";
+            this.lbl_headroom.Size = new System.Drawing.Size(62, 15);
+            this.lbl_headroom.TabIndex = 5;
+            this.lbl_headroom.Text = "headroom";
+            // 
+            // lbl_inAir
+            // 
+            this.lbl_inAir.AutoSize = true;
+            this.lbl_inAir.Location = new System.Drawing.Point(0, 45);
+            this.lbl_inAir.Name = "lbl_inAir";
+            this.lbl_inAir.Size = new System.Drawing.Size(32, 15);
+            this.lbl_inAir.TabIndex = 4;
+            this.lbl_inAir.Text = "inAir";
+            // 
+            // lbl_jumpTicks
+            // 
+            this.lbl_jumpTicks.AutoSize = true;
+            this.lbl_jumpTicks.Location = new System.Drawing.Point(0, 120);
+            this.lbl_jumpTicks.Name = "lbl_jumpTicks";
+            this.lbl_jumpTicks.Size = new System.Drawing.Size(61, 15);
+            this.lbl_jumpTicks.TabIndex = 9;
+            this.lbl_jumpTicks.Text = "jumpTicks";
             // 
             // frm_game
             // 
@@ -179,5 +190,6 @@
         private Label lbl_x;
         private Panel panel1;
         private Label lbl_gravity;
+        private Label lbl_jumpTicks;
     }
 }
