@@ -24,23 +24,26 @@ namespace JumpRun
 
         public int jumpTicks = 0;
         public int minJumpTicks = 5;
-        static int force = -15;
+        static int force = -17;
         static int gravity = 0;
         static bool inAir = true;
         static bool headroom = true;
 
-        static int boxHeight = 50;
-        static int boxWidth = 50;
+        static int blockHeight = 50;
+        static int blockWidth = 50;
 
         static List<Rectangle> liBlocks = new List<Rectangle>();
 
         //Player Collision Detection
         static Rectangle colBot;
         static Rectangle colTop;
-        static Rectangle colTopLeft;
-        static Rectangle colTopRight;
-        static Rectangle colBotLeft;
-        static Rectangle colBotRight;
+        static Rectangle colLeftTop;
+        static Rectangle colRightTop;
+        static Rectangle colLeftBot;
+        static Rectangle colRightBot;
+
+        static bool canMoveToTheLeft;
+        static bool canMoveToTheRight;
 
         Graphics g;
         #endregion
@@ -52,11 +55,11 @@ namespace JumpRun
             { 1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0 },
             { 1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0 },
             { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-            { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-            { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-            { 0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0 },
-            { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-            { 0,0,0,0,0,3,4,1,0,0,0,0,0,0,0,0,0,0,2,1 },
+            { 0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0 },
+            { 0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+            { 0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0 },
+            { 0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,2 },
+            { 0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,3,4,1 },
             { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 }};
         #endregion
 
@@ -67,36 +70,19 @@ namespace JumpRun
             Movement();
             Collision();
             DebugVariables();
-            ShowPlayerCollisionDetection();
+            //ShowPlayerCollisionDetection();
         }
 
         public void Movement()
         {
-            //basic left right movement
-            if (left)
+            //basic left & right movement
+            if (left && canMoveToTheLeft)
             {
                 player.Left -= playerSpeed;
             }
-            else if (right)
+            else if (right && canMoveToTheRight)
             {
                 player.Left += playerSpeed;
-            }
-
-            //Stop player from going higher
-            if(!up && gravity < 0 && jumpTicks >= minJumpTicks)
-            {
-                //-3 because of smoother jumping curve - not an aprupt stop in velocity
-                gravity = -3;
-                jumpTicks = 0;
-            }
-            
-            if (inAir)
-            {
-                gravity += 1;
-            }
-            else if(!inAir) //if player touches the floor
-            {
-                gravity = 0;
             }
 
             //allow player to jump
@@ -106,21 +92,41 @@ namespace JumpRun
                 gravity = force;
             }
 
+            //check if player touches the floor
+            if (inAir)
+            {
+                gravity += 1;
+            }
+            else if (!inAir)
+            {
+                gravity = 0;
+            }
+
             //track jumping duration
-            if(gravity < 0)
+            if (gravity < 0)
             {
                 jumpTicks++;
             }
-            else if(gravity >= 0) //if player starts falling down again - reset jumpTick tracker
+            else if (gravity >= 0) //if player starts falling down again - reset jumpTick tracker
             {
                 jumpTicks = 0;
             }
 
+            //Prevent player from going higher
+            if (!up && gravity < 0 && jumpTicks >= minJumpTicks)
+            {
+                //-3 because of smoother jumping curve - not an aprupt stop in velocity
+                gravity = -3;
+                jumpTicks = 0;
+            }
+
+            //move player according to gravity's value
             player.Top += gravity;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            //Basic Key Pressed Event
             if (e.KeyCode.Equals(Keys.A))
             {
                 left = true;
@@ -137,6 +143,7 @@ namespace JumpRun
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
+            //Basic Key Released Event
             if (e.KeyCode.Equals(Keys.A))
             {
                 left = false;
@@ -153,24 +160,43 @@ namespace JumpRun
 
         private void Collision()
         {
-            colBot = new Rectangle(player.Left, player.Bottom, player.Width, 1); //Bottom Collision
-            colTop = new Rectangle(player.Left, player.Top - 1, player.Width, 1); //Top Collision
+            colBot = new Rectangle(player.Left, player.Bottom, playerWidth, 1); //Bottom Collision
+            colTop = new Rectangle(player.Left, player.Top - 1, playerWidth, 1); //Top Collision
+            colLeftTop = new Rectangle(player.Left - 1, player.Top, 1, playerHeight); // Left Top Collision
+            colRightTop = new Rectangle(player.Right, player.Top, 1, playerHeight); // Left Top Collision
 
+            //Check if player intersects with any Blocks/Enemies/...
             inAir = true;
             headroom = true;
+            canMoveToTheLeft = true;
+            canMoveToTheRight = true;
             foreach(Rectangle b in liBlocks)
             {
                 if (colBot.IntersectsWith(b))
                 {
                     inAir = false;
-                    player.Top = b.Top - player.Height;
+                    player.Top = b.Top - playerHeight;
+                    break;
                 }
                 if (colTop.IntersectsWith(b))
                 {
                     headroom = false;
                     gravity = 0;
                     player.Top = b.Bottom;
+                    break;
                 }
+                if (colLeftTop.IntersectsWith(b))
+                {
+                    canMoveToTheLeft = false;
+                    player.Left = b.Right;
+                }
+                if (colRightTop.IntersectsWith(b))
+                {
+                    canMoveToTheRight = false;
+                    player.Left = b.Left - playerWidth;
+                }
+                
+                
             }
         }
         #endregion
@@ -184,35 +210,35 @@ namespace JumpRun
                 {
                     if (world[y, x] == 1) // normal block
                     {
-                        Rectangle block = new Rectangle(x * boxWidth, y * boxHeight, boxWidth, boxHeight);
+                        Rectangle block = new Rectangle(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
                         g.FillRectangle(Brushes.LightBlue, block);
                         liBlocks.Add(block);
                     }
                     else if (world[y, x] == 2) // steep slope right
                     {
                         Point[] points = new Point[3];
-                        points[0] = new Point(x * boxWidth, (y + 1) * boxHeight);
-                        points[1] = new Point((x + 1) * boxWidth, y * boxHeight);
-                        points[2] = new Point((x + 1) * boxWidth, (y + 1) * boxHeight);
+                        points[0] = new Point(x * blockWidth, (y + 1) * blockHeight);
+                        points[1] = new Point((x + 1) * blockWidth, y * blockHeight);
+                        points[2] = new Point((x + 1) * blockWidth, (y + 1) * blockHeight);
                         g.FillPolygon(Brushes.CornflowerBlue, points);
                     }
                     else if (world[y, x] == 3) // gentle slope right
                     {
                         Point[] points = new Point[3];
-                        points[0] = new Point(x * boxWidth, (y + 1) * boxHeight);
-                        points[1] = new Point((x + 1) * boxWidth, y * boxHeight + boxHeight / 2);
-                        points[2] = new Point((x + 1) * boxWidth, (y + 1) * boxHeight);
+                        points[0] = new Point(x * blockWidth, (y + 1) * blockHeight);
+                        points[1] = new Point((x + 1) * blockWidth, y * blockHeight + blockHeight / 2);
+                        points[2] = new Point((x + 1) * blockWidth, (y + 1) * blockHeight);
                         g.FillPolygon(Brushes.CornflowerBlue, points);
                     }
                     else if (world[y, x] == 4) // gentle slope right upper part
                     {
                         Point[] points = new Point[3];
-                        points[0] = new Point(x * boxWidth, (y + 1) * boxHeight - boxHeight / 2);
-                        points[1] = new Point((x + 1) * boxWidth, y * boxHeight);
-                        points[2] = new Point((x + 1) * boxWidth, (y + 1) * boxHeight - boxHeight / 2);
+                        points[0] = new Point(x * blockWidth, (y + 1) * blockHeight - blockHeight / 2);
+                        points[1] = new Point((x + 1) * blockWidth, y * blockHeight);
+                        points[2] = new Point((x + 1) * blockWidth, (y + 1) * blockHeight - blockHeight / 2);
                         g.FillPolygon(Brushes.CornflowerBlue, points);
 
-                        Rectangle block = new Rectangle(x * boxWidth, y * boxHeight + boxHeight / 2, boxWidth, boxHeight / 2);
+                        Rectangle block = new Rectangle(x * blockWidth, y * blockHeight + blockHeight / 2, blockWidth, blockHeight / 2);
                         g.FillRectangle(Brushes.LightBlue, block);
                     }
                 }
@@ -224,7 +250,7 @@ namespace JumpRun
             //Setup the Player PictureBox
             player.Width = playerWidth;
             player.Height = playerHeight;
-            player.BackColor = Color.DarkGray;
+            player.BackColor = Color.Blue;
             player.Top = 300;
             player.Left = 100;
             game.Controls.Add(player);
@@ -235,7 +261,7 @@ namespace JumpRun
         #region Debug
         public void DebugVariables()
         {
-            lbl_left.Text = "left: " + left.ToString();
+            lbl_left.Text = "left: " + left.ToString();   
             lbl_right.Text = "right: " + right.ToString();
             lbl_up.Text = "up: " + up.ToString();
             lbl_inAir.Text = "inAir: " + inAir.ToString();
@@ -250,6 +276,8 @@ namespace JumpRun
         {
             g.FillRectangle(Brushes.Red, colBot);
             g.FillRectangle(Brushes.Red, colTop);
+            g.FillRectangle(Brushes.Red, colLeftTop);
+            g.FillRectangle(Brushes.Red, colRightTop);
         }
         #endregion
 

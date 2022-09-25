@@ -35,12 +35,12 @@
             this.lbl_up = new System.Windows.Forms.Label();
             this.game = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_jumpTicks = new System.Windows.Forms.Label();
             this.lbl_gravity = new System.Windows.Forms.Label();
             this.lbl_y = new System.Windows.Forms.Label();
             this.lbl_x = new System.Windows.Forms.Label();
             this.lbl_headroom = new System.Windows.Forms.Label();
             this.lbl_inAir = new System.Windows.Forms.Label();
-            this.lbl_jumpTicks = new System.Windows.Forms.Label();
             this.game.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -100,8 +100,17 @@
             this.panel1.Controls.Add(this.lbl_inAir);
             this.panel1.Location = new System.Drawing.Point(887, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(101, 213);
+            this.panel1.Size = new System.Drawing.Size(101, 147);
             this.panel1.TabIndex = 8;
+            // 
+            // lbl_jumpTicks
+            // 
+            this.lbl_jumpTicks.AutoSize = true;
+            this.lbl_jumpTicks.Location = new System.Drawing.Point(0, 120);
+            this.lbl_jumpTicks.Name = "lbl_jumpTicks";
+            this.lbl_jumpTicks.Size = new System.Drawing.Size(61, 15);
+            this.lbl_jumpTicks.TabIndex = 9;
+            this.lbl_jumpTicks.Text = "jumpTicks";
             // 
             // lbl_gravity
             // 
@@ -147,15 +156,6 @@
             this.lbl_inAir.Size = new System.Drawing.Size(32, 15);
             this.lbl_inAir.TabIndex = 4;
             this.lbl_inAir.Text = "inAir";
-            // 
-            // lbl_jumpTicks
-            // 
-            this.lbl_jumpTicks.AutoSize = true;
-            this.lbl_jumpTicks.Location = new System.Drawing.Point(0, 120);
-            this.lbl_jumpTicks.Name = "lbl_jumpTicks";
-            this.lbl_jumpTicks.Size = new System.Drawing.Size(61, 15);
-            this.lbl_jumpTicks.TabIndex = 9;
-            this.lbl_jumpTicks.Text = "jumpTicks";
             // 
             // frm_game
             // 
