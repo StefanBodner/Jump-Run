@@ -12,8 +12,9 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\stefa\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\stefa\\.nuget\\packages"
+      "C:\\Users\\stefan.bodner\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\stefan.bodner\\.nuget\\packages",
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true

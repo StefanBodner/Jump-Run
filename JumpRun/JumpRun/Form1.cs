@@ -14,8 +14,8 @@ namespace JumpRun
 
         #region Variables 
         PictureBox player = new PictureBox();
-        int playerWidth = 30;
-        int playerHeight = 30;
+        int playerWidth = 50;
+        int playerHeight = 50;
 
         static bool left = false;
         static bool right = false;
@@ -56,9 +56,9 @@ namespace JumpRun
             { 1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0 },
             { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
             { 0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0 },
-            { 0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+            { 0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0 },
             { 0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0 },
-            { 0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,2 },
+            { 0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,0,0,2 },
             { 0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,3,4,1 },
             { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 }};
         #endregion
@@ -68,7 +68,7 @@ namespace JumpRun
         private void tmr_game_Tick(object sender, EventArgs e)
         {
             Movement();
-            Collision();
+            Collision(); 
             DebugVariables();
             //ShowPlayerCollisionDetection();
         }
@@ -158,12 +158,17 @@ namespace JumpRun
             }
         }
 
+        public void SetCollision()
+        {
+            colBot = new Rectangle(player.Left, player.Bottom, playerWidth, playerSpeed); //Bottom Collision
+            colTop = new Rectangle(player.Left, player.Top - playerSpeed, playerWidth, playerSpeed); //Top Collision
+            colLeftTop = new Rectangle(player.Left - playerSpeed, player.Top, 3, playerHeight); // Left Top Collision
+            colRightTop = new Rectangle(player.Right, player.Top, playerSpeed, playerHeight); // Left Top Collision
+        }
+
         private void Collision()
         {
-            colBot = new Rectangle(player.Left, player.Bottom, playerWidth, 1); //Bottom Collision
-            colTop = new Rectangle(player.Left, player.Top - 1, playerWidth, 1); //Top Collision
-            colLeftTop = new Rectangle(player.Left - 1, player.Top, 1, playerHeight); // Left Top Collision
-            colRightTop = new Rectangle(player.Right, player.Top, 1, playerHeight); // Left Top Collision
+            SetCollision();
 
             //Check if player intersects with any Blocks/Enemies/...
             inAir = true;
@@ -176,27 +181,28 @@ namespace JumpRun
                 {
                     inAir = false;
                     player.Top = b.Top - playerHeight;
-                    break;
+                    gravity = 0;
+                    SetCollision();
                 }
-                if (colTop.IntersectsWith(b))
+                if (colTop.IntersectsWith(b) && gravity < 0)
                 {
                     headroom = false;
                     gravity = 0;
                     player.Top = b.Bottom;
-                    break;
+                    SetCollision();
                 }
-                if (colLeftTop.IntersectsWith(b))
+                if (colLeftTop.IntersectsWith(b) )
                 {
                     canMoveToTheLeft = false;
                     player.Left = b.Right;
+                    SetCollision();
                 }
                 if (colRightTop.IntersectsWith(b))
                 {
                     canMoveToTheRight = false;
                     player.Left = b.Left - playerWidth;
+                    SetCollision();
                 }
-                
-                
             }
         }
         #endregion
@@ -270,6 +276,8 @@ namespace JumpRun
             lbl_y.Text = "y: " + player.Top.ToString();
             lbl_gravity.Text = "gravity: " + gravity.ToString();
             lbl_jumpTicks.Text = "jumpTicks: " + jumpTicks.ToString();
+            lbl_canMoveToTheLeft.Text = "canLeft: " + canMoveToTheLeft.ToString();
+            lbl_canMoveToTheRight.Text = "canRight: " + canMoveToTheRight.ToString();
         }
 
         public void ShowPlayerCollisionDetection()

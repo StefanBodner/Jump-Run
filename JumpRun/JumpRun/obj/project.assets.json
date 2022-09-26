@@ -8,19 +8,23 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\stefa\\.nuget\\packages\\": {}
+    "C:\\Users\\stefan.bodner\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\stefa\\Source\\Repos\\StefanBodner\\Jump-Run\\JumpRun\\JumpRun\\JumpRun.csproj",
+      "projectUniqueName": "C:\\Users\\stefan.bodner\\Source\\Repos\\StefanBodner\\Jump-Run\\JumpRun\\JumpRun\\JumpRun.csproj",
       "projectName": "JumpRun",
-      "projectPath": "C:\\Users\\stefa\\Source\\Repos\\StefanBodner\\Jump-Run\\JumpRun\\JumpRun\\JumpRun.csproj",
-      "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\stefa\\Source\\Repos\\StefanBodner\\Jump-Run\\JumpRun\\JumpRun\\obj\\",
+      "projectPath": "C:\\Users\\stefan.bodner\\Source\\Repos\\StefanBodner\\Jump-Run\\JumpRun\\JumpRun\\JumpRun.csproj",
+      "packagesPath": "C:\\Users\\stefan.bodner\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\stefan.bodner\\Source\\Repos\\StefanBodner\\Jump-Run\\JumpRun\\JumpRun\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\stefan.bodner\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -63,7 +67,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

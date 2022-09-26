@@ -41,6 +41,8 @@
             this.lbl_x = new System.Windows.Forms.Label();
             this.lbl_headroom = new System.Windows.Forms.Label();
             this.lbl_inAir = new System.Windows.Forms.Label();
+            this.lbl_canMoveToTheLeft = new System.Windows.Forms.Label();
+            this.lbl_canMoveToTheRight = new System.Windows.Forms.Label();
             this.game.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -89,6 +91,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lbl_canMoveToTheRight);
+            this.panel1.Controls.Add(this.lbl_canMoveToTheLeft);
             this.panel1.Controls.Add(this.lbl_jumpTicks);
             this.panel1.Controls.Add(this.lbl_gravity);
             this.panel1.Controls.Add(this.lbl_left);
@@ -100,7 +104,7 @@
             this.panel1.Controls.Add(this.lbl_inAir);
             this.panel1.Location = new System.Drawing.Point(887, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(101, 147);
+            this.panel1.Size = new System.Drawing.Size(101, 189);
             this.panel1.TabIndex = 8;
             // 
             // lbl_jumpTicks
@@ -157,6 +161,24 @@
             this.lbl_inAir.TabIndex = 4;
             this.lbl_inAir.Text = "inAir";
             // 
+            // lbl_canMoveToTheLeft
+            // 
+            this.lbl_canMoveToTheLeft.AutoSize = true;
+            this.lbl_canMoveToTheLeft.Location = new System.Drawing.Point(0, 135);
+            this.lbl_canMoveToTheLeft.Name = "lbl_canMoveToTheLeft";
+            this.lbl_canMoveToTheLeft.Size = new System.Drawing.Size(107, 15);
+            this.lbl_canMoveToTheLeft.TabIndex = 10;
+            this.lbl_canMoveToTheLeft.Text = "canMoveToTheLeft";
+            // 
+            // lbl_canMoveToTheRight
+            // 
+            this.lbl_canMoveToTheRight.AutoSize = true;
+            this.lbl_canMoveToTheRight.Location = new System.Drawing.Point(0, 150);
+            this.lbl_canMoveToTheRight.Name = "lbl_canMoveToTheRight";
+            this.lbl_canMoveToTheRight.Size = new System.Drawing.Size(115, 15);
+            this.lbl_canMoveToTheRight.TabIndex = 11;
+            this.lbl_canMoveToTheRight.Text = "canMoveToTheRight";
+            // 
             // frm_game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -191,5 +213,7 @@
         private Panel panel1;
         private Label lbl_gravity;
         private Label lbl_jumpTicks;
+        private Label lbl_canMoveToTheRight;
+        private Label lbl_canMoveToTheLeft;
     }
 }
